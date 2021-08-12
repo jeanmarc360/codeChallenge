@@ -7,11 +7,21 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "tslint src/**/*.ts* --project tsconfig.json"
+    "lint2": "eslint",
+    "lint": "tslint src/**/*.ts* --project tsconfig.json",
+    "clear-cache": "watchman watch-del-all && rm -rf $TMPDIR/react-native-packager-cache-* && rm -rf $TMPDIR/metro-bundler-cache-* && rm -rf node_modules/ && npm cache clean --force && npm install && npm start -- --reset-cache"
   },
   "dependencies": {
+    "@react-navigation/native": "^6.0.2",
+    "@react-navigation/stack": "^6.0.6",
+    "axios": "^0.21.1",
+    "merge-stream": "^2.0.0",
     "react": "17.0.1",
-    "react-native": "0.64.2"
+    "react-native": "0.64.2",
+    "react-native-splash-screen": "^3.2.0",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.1",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",
@@ -19,6 +29,7 @@
     "@react-native-community/eslint-config": "^3.0.0",
     "@types/react": "^17.0.17",
     "@types/react-native": "^0.64.12",
+    "@types/react-redux": "^7.1.18",
     "babel-jest": "^27.0.6",
     "eslint": "^7.32.0",
     "jest": "^27.0.6",
