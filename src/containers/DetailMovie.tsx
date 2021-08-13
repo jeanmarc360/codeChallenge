@@ -15,33 +15,32 @@ import {URLS} from '../services/url';
 import { MovieDetailInterface} from '../redux/types/movies.types';
 import {Text} from 'react-native';
 
-interface Props {
-    id: number
-}
-export const Home: FC<Props> = props => {
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor:'#658954'
+  },
+});
+
+export const DetailMovie = ({ route, navigation }: any) => {
+//export const DetailMovie: FC<Props> = props => {
+  const { id } = route.params;
   const dispatch = useDispatch();
   const detail: MovieDetailInterface = useSelector(
     (state: RootState) => state.movieReducer.detailMovie,
   );
   useEffect(() => {
-    //get(URLS.SEARCH_URL("spiderman"));
-    dispatch(clickMovies(props.id));
-    console.log(detail);
+    console.log('Screen Detail Movie');
+    /*dispatch(clickMovies(id));
+    console.log(detail);*/
   }, []);
 
   return (
-    <View
-      style={{
-        flexGrow: 1,
-      }}>
-      <View
-        style={{
-          alignItems: 'center',
-          justifyContent: 'center',
-          alignContent: 'center',
-        }}
-      />
-      <Text style={{color: '#ffffff', fontSize: 50}}>Screen Detail</Text>
+    <View style={styles.container}>
+      <Text style={{color:'#ffffff',fontSize: 25 }}>Screen detail</Text>
     </View>
   );
 };

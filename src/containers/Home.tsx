@@ -15,31 +15,33 @@ import {URLS} from '../services/url';
 import {MovieInterface} from '../redux/types/movies.types';
 import {Text} from 'react-native';
 
-interface Props {}
-export const Home: FC<Props> = props => {
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor:'#254784'
+  },
+});
+
+export const Home = ({navigation}: any) => {
   const dispatch = useDispatch();
   const movies: MovieInterface = useSelector(
     (state: RootState) => state.movieReducer.movies,
   );
   useEffect(() => {
-    //get(URLS.SEARCH_URL("spiderman"));
-    dispatch(fetchMovie('avenger'));
-    console.log(movies);
+    console.log('Screen Home');
+   // dispatch(fetchMovie('avenger'));
+   // console.log(movies);
+
+   setTimeout(()=>{
+     navigation.navigate('DetailMovie',{id:1});
+   },2000);
   }, []);
 
   return (
-    <View
-      style={{
-        flexGrow: 1,
-      }}>
-      <View
-        style={{
-          alignItems: 'center',
-          justifyContent: 'center',
-          alignContent: 'center',
-        }}
-      />
-      <Text style={{color: '#ffffff', fontSize: 50}}>Screen Home</Text>
+    <View style={styles.container}>
+      <Text style={{color:'#ffffff',fontSize: 25 }}>Screen Home</Text>
     </View>
   );
 };
