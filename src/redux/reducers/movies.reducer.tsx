@@ -2,12 +2,13 @@ import {FETCH_MOVIES_SUCCEEDED, MoviesActionTypes} from '../types';
 import {MovieInterface, MovieDetailInterface} from '../types';
 
 interface MoviesState {
-  movies: MovieInterface[];
+  movies: MovieInterface;
   detailMovie: MovieDetailInterface;
 }
 
 const initialState: MoviesState = {
-  movies: [],
+  movies: null,
+  detailMovie: null,
 };
 
 export const moviesReducer = (

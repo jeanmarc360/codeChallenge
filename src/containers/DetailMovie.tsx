@@ -9,22 +9,24 @@ import {
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../redux/reducers/index';
-import {fetchMovie, clickMovies} from '../redux/index';
+import {clickMovies} from '../redux/index';
 import {get} from '../services/api';
 import {URLS} from '../services/url';
-import {MovieInterface} from '../redux/types/movies.types';
+import { MovieDetailInterface} from '../redux/types/movies.types';
 import {Text} from 'react-native';
 
-interface Props {}
+interface Props {
+    id: number
+}
 export const Home: FC<Props> = props => {
   const dispatch = useDispatch();
-  const movies: MovieInterface = useSelector(
-    (state: RootState) => state.movieReducer.movies,
+  const detail: MovieDetailInterface = useSelector(
+    (state: RootState) => state.movieReducer.detailMovie,
   );
   useEffect(() => {
     //get(URLS.SEARCH_URL("spiderman"));
-    dispatch(fetchMovie('avenger'));
-    console.log(movies);
+    dispatch(clickMovies(props.id));
+    console.log(detail);
   }, []);
 
   return (
@@ -39,7 +41,7 @@ export const Home: FC<Props> = props => {
           alignContent: 'center',
         }}
       />
-      <Text style={{color: '#ffffff', fontSize: 50}}>Screen Home</Text>
+      <Text style={{color: '#ffffff', fontSize: 50}}>Screen Detail</Text>
     </View>
   );
 };

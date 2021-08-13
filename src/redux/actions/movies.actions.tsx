@@ -8,21 +8,25 @@ import {
   FETCH_MOVIES_SUCCEEDED,
 } from '../types';
 //import { storiesService } from '../../services';
-import {MovieInterface, MovieDetailInterface, MoviesActionTypes} from '../types';
+import {
+  MovieInterface,
+  MovieDetailInterface,
+  MoviesActionTypes,
+} from '../types';
 import {ActionCreator} from 'redux';
 import {get} from '../../services/index';
 import {URLS} from '../../services/url';
 
 const fetchMovieSuccess: ActionCreator<MoviesActionTypes> = (
-  movies: MovieInterface[],
+  movies: MovieInterface
 ) => {
   return {type: FETCH_MOVIES_SUCCEEDED, payload: movies};
 };
 
 const fetchDetailMovieSuccess: ActionCreator<MoviesActionTypes> = (
-  movies: MovieDetailInterface,
+  detailMovie: MovieDetailInterface
 ) => {
-  return {type: FETCH_MOVIE_SUCCEEDED, payload: movies};
+  return {type: FETCH_MOVIE_SUCCEEDED, payload: detailMovie};
 };
 
 export const fetchMovie =
@@ -33,8 +37,8 @@ export const fetchMovie =
     await get(URLS.SEARCH_URL(query))
       .then((response: any) => {
         // handle success
-       // console.log(response);
-        dispatch(fetchMovieSuccess(response));
+        //console.log(response.data);
+        dispatch(fetchMovieSuccess(response.data));
       })
       .catch((error: any) => {
         // handle error

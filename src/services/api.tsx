@@ -5,6 +5,12 @@ const instance = axios.create();
 export const get = async (url: string) => {
   console.log(url);
   const res = await instance.get(url);
+  //console.log(res);
+ // console.log(res.data);
+    //console.log(res.status);
+    //console.log(res.statusText);
+    //console.log(res.headers);
+    //console.log(res.config);
   return res;
 };
 
