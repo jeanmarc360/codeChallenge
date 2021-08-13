@@ -12,22 +12,20 @@ import {RootState} from '../redux/reducers/index';
 import {clickMovies} from '../redux/index';
 import {get} from '../services/api';
 import {URLS} from '../services/url';
-import { MovieDetailInterface} from '../redux/types/movies.types';
+import {MovieDetailInterface} from '../redux/types/movies.types';
 import {Text} from 'react-native';
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor:'#658954'
+    backgroundColor: '#658954',
   },
 });
 
-export const DetailMovie = ({ route, navigation }: any) => {
-//export const DetailMovie: FC<Props> = props => {
-  const { id } = route.params;
+export const DetailMovie = ({route, navigation}: any) => {
+  const {id} = route.params;
   const dispatch = useDispatch();
   const detail: MovieDetailInterface = useSelector(
     (state: RootState) => state.movieReducer.detailMovie,
@@ -40,7 +38,7 @@ export const DetailMovie = ({ route, navigation }: any) => {
 
   return (
     <View style={styles.container}>
-      <Text style={{color:'#ffffff',fontSize: 25 }}>Screen detail</Text>
+      <Text style={{color: '#ffffff', fontSize: 25}}>Screen detail</Text>
     </View>
   );
 };
