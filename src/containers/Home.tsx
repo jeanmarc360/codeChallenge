@@ -18,7 +18,6 @@ import {posterSizes} from '../common/image/size';
 import {images} from '../common/image/images';
 import {Image} from 'react-native-elements';
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -67,6 +66,7 @@ export const Home = ({navigation}: any) => {
   const [loading, setLoading] = useState(true);
   const [offset, setOffset] = useState(1);
   const [search, setSearch] = useState('avenger');
+  const [total, setTotal] = useState(0);
   const [startSearch, setStartSearch] = useState(true);
   /***
    * Get the movies reducer value
@@ -74,34 +74,44 @@ export const Home = ({navigation}: any) => {
   const movies: MovieInterface = useSelector(
     (state: RootState) => state.movieReducer.movies,
   );
+  /*const movies: MovieInterface[] = useSelector(
+    (state: RootState) => state.movieReducer.movies,
+  );*/
 
   /**
    * Call action fetchMovie on screen display and if the user valid the text search
    */
   useEffect(() => {
     console.log('Screen Home');
-    if (startSearch) {
-      setLoading(true);
-      // setOffset(offset + 1);
-      if (search.length > 0) {
-        dispatch(fetchMovie(search, 1));
-      }
-      console.log(movies);
-      setLoading(false);
-      setStartSearch(false);
-    }
-  }, [startSearch]);
+    searchMovie();
+  }, []);
 
-  
   const loadMore = () => {
-    /*setLoading(true);
-    setOffset(offset + 1);
-    dispatch(fetchMovie(search, offset));
-    setLoading(false);*/
+    if (total === 0) {
+      setTotal(movies.total_pages);
+    }
+    setLoading(true);
+    if (offset + 1 <= total) {
+      setOffset(offset + 1);
+      dispatch(fetchMovie(search, offset));
+    }
+    setLoading(false);
+  };
+
+  const refresh = () => {
+    if (total === 0) {
+      setTotal(movies.total_pages);
+    }
+    setLoading(true);
+    if (offset - 1 > 0) {
+      setOffset(offset - 1);
+      dispatch(fetchMovie(search, offset));
+    }
+    setLoading(false);
   };
   /**
    * Render list separator
-   * @returns 
+   * @returns
    */
   const ItemSeparatorView = () => {
     return (
@@ -125,7 +135,11 @@ export const Home = ({navigation}: any) => {
    * beging search movies
    */
   const searchMovie = () => {
-    setStartSearch(true);
+    //setStartSearch(true);
+    setLoading(true);
+    dispatch(fetchMovie(search, 1));
+    setLoading(false);
+    setStartSearch(false);
   };
   /**
    *  Render the footer's list
@@ -149,12 +163,12 @@ export const Home = ({navigation}: any) => {
 
   /**
    *  render the no result image and text if no result found
-   * @returns 
+   * @returns
    */
   const renderNoResult = () => {
     return (
       <View style={styles.noresult}>
-        <Text style={styles.text_no_result}>Pas de resultat</Text>
+        <Text style={styles.text_no_result}>No result</Text>
         <Image source={images.no_result} style={{width: 200, height: 200}} />
       </View>
     );
@@ -173,7 +187,7 @@ export const Home = ({navigation}: any) => {
       />
       {loading ? (
         <ActivityIndicator size="large" color="#ffffff" />
-      ) : movies && movies.results.length > 0 ? (
+      ) : movies && movies.results && movies.results.length > 0 ? (
         <FlatList
           style={{marginTop: 20}}
           data={movies && movies.results}
@@ -227,6 +241,8 @@ export const Home = ({navigation}: any) => {
           onEndReached={loadMore}
           onEndReachedThreshold={0.5}
           initialNumToRender={20}
+          onRefresh={refresh}
+          refreshing={false}
         />
       ) : (
         renderNoResult()

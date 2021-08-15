@@ -22,6 +22,7 @@ const fetchMovieSuccess: ActionCreator<MoviesActionTypes> = (
 ) => {
   return {type: FETCH_MOVIES_SUCCEEDED, payload: movies};
 };
+ 
 
 const fetchDetailMovieSuccess: ActionCreator<MoviesActionTypes> = (
   detailMovie: MovieDetailInterface,
@@ -31,20 +32,20 @@ const fetchDetailMovieSuccess: ActionCreator<MoviesActionTypes> = (
 
 export const fetchMovie =
   (query: String = '', page: number = 1) =>
-  async dispatch => {
+  async (dispatch, getState) => {
+    const movies: MovieInterface[] = getState().movieReducer.movies;
+
     dispatch({type: FETCH_MOVIES_INITIATED});
 
     await get(URLS.SEARCH_URL(query, page))
       .then((response: any) => {
-        // handle success
-        //console.log(response.data);
         dispatch(fetchMovieSuccess(response.data));
       })
       .catch((error: any) => {
         // handle error
         console.log(error);
         dispatch({type: FETCH_MOVIES_FAILED});
-        console.error('%cData Fetching Error:', 'font-size: 18px', error);
+        console.error('Data Fetching :', error);
       })
       .then(() => {
         // always executed

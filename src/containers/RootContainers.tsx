@@ -1,7 +1,8 @@
 import NetInfo from '@react-native-community/netinfo';
 import {NavigationContainer} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {Alert} from 'react-native';
+import {Alert, View, StyleSheet} from 'react-native';
+import {Text} from 'react-native-elements';
 import AppNavigation from '../navigation/AppNavigation';
 
 const RootContainer = () => {
@@ -27,6 +28,7 @@ const RootContainer = () => {
           text: 'Try again',
           onPress: () => {
             console.log('--Manual');
+            // tslint:disable-next-line: no-floating-promises
             NetInfo.fetch().then(state => {
               setConnection(state.isInternetReachable);
             });
@@ -39,6 +41,11 @@ const RootContainer = () => {
 
   return (
     <NavigationContainer>
+      {!connection && (
+        <View style={styles.view_connexion}>
+          <Text style={styles.text}>Pas d'internet</Text>
+        </View>
+      )}
       <AppNavigation />
     </NavigationContainer>
   );
@@ -46,3 +53,13 @@ const RootContainer = () => {
 
 export default RootContainer;
 
+const styles = StyleSheet.create({
+  view_connexion: {
+    backgroundColor: 'red',
+    width: '100%',
+    height: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {color: 'white', fontSize: 15},
+});

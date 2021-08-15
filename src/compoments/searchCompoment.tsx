@@ -36,7 +36,7 @@ export const SearchView: React.FC<
           value={query}
           onChangeText={queryText => handlerTextChange(queryText)}
           style={styles.imput}
-          placeholder="Enter Text Here..."
+          placeholder="Enter the movie's title"
           onSubmitEditing={handleKeyPress}
         />
       </View>
