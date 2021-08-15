@@ -1,8 +1,7 @@
 import NetInfo from '@react-native-community/netinfo';
 import {NavigationContainer} from '@react-navigation/native';
-import React, {useContext, useEffect, useState} from 'react';
-import {View} from 'react-native';
-import {Alert, SafeAreaView, StatusBar} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Alert} from 'react-native';
 import AppNavigation from '../navigation/AppNavigation';
 
 const RootContainer = () => {
@@ -40,9 +39,10 @@ const RootContainer = () => {
 
   return (
     <NavigationContainer>
-     <AppNavigation />
+      <AppNavigation />
     </NavigationContainer>
   );
 };
 
 export default RootContainer;
+

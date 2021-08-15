@@ -85,7 +85,7 @@ export const FETCH_MOVIES_SUCCEEDED = 'FETCH_MOVIES_SUCCEEDED';
 
 interface SearchMoviesAction {
   type: typeof FETCH_MOVIES_SUCCEEDED;
-  payload: MovieInterface[];
+  payload: MovieInterface;
 }
 interface DetailMovieAction {
   type: typeof FETCH_MOVIE_SUCCEEDED;
