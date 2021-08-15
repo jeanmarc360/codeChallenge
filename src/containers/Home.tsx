@@ -237,7 +237,6 @@ export const Home = ({navigation}: any) => {
           keyExtractor={item => item.id}
           ItemSeparatorComponent={ItemSeparatorView}
           enableEmptySections={true}
-          ListFooterComponent={renderFooter}
           onEndReached={loadMore}
           onEndReachedThreshold={0.5}
           initialNumToRender={20}
