@@ -24,7 +24,7 @@ export const moviesReducer = (
     case FETCH_MOVIES_SUCCEEDED: {
       return {
         ...state,
-        movies:  action.payload,
+        movies: action.payload,
       };
     }
     case FETCH_MOVIE_SUCCEEDED: {
