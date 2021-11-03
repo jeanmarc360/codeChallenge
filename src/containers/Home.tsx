@@ -11,9 +11,9 @@ import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../redux/reducers/index';
 import {fetchMovie} from '../redux/index';
 import {URLS} from '../services/url';
-import {MovieInterface} from '../redux/types/movies.types';
+import {MovieInterface} from '../redux/types/movies/movies.types';
 import {Text} from 'react-native';
-import {SearchView} from '../compoments/searchCompoment';
+import {SearchView} from '../compoments/search/searchCompoment';
 import {posterSizes} from '../common/image/size';
 import {images} from '../common/image/images';
 import {Image} from 'react-native-elements';
@@ -71,7 +71,7 @@ export const Home = ({navigation}: any) => {
   /***
    * Get the movies reducer value
    */
-  const movies: MovieInterface = useSelector(
+  const movies: MovieInterface | null = useSelector(
     (state: RootState) => state.movieReducer.movies,
   );
   /*const movies: MovieInterface[] = useSelector(
@@ -177,11 +177,11 @@ export const Home = ({navigation}: any) => {
     <View style={styles.container}>
       <SearchView
         onChangeText={text => {
-          console.log(text);
+          //console.log(text);
           applySearch(text);
         }}
         onKeyPressSearch={() => {
-          console.log('clic');
+          //console.log('clic');
           searchMovie();
         }}
       />
