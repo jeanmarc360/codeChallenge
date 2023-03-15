@@ -2,12 +2,12 @@ import {
   FETCH_MOVIES_SUCCEEDED,
   FETCH_MOVIE_SUCCEEDED,
   MoviesActionTypes,
-} from '../types';
-import {MovieInterface, MovieDetailInterface} from '../types';
+} from '../../types';
+import {MovieInterface, MovieDetailInterface} from '../../types';
 
 interface MoviesState {
-  movies: MovieInterface;
-  detailMovie: MovieDetailInterface;
+  movies: MovieInterface | null;
+  detailMovie: MovieDetailInterface | null;
 }
 
 const initialState: MoviesState = {

@@ -46,6 +46,7 @@ const RootContainer = () => {
           <Text style={styles.text}>Pas d'internet</Text>
         </View>
       )}
+      
       <AppNavigation />
     </NavigationContainer>
   );

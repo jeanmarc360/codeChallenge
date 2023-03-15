@@ -10,7 +10,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../redux/reducers/index';
 import {clickMovies} from '../redux/index';
 import {URLS} from '../services/url';
-import {MovieDetailInterface} from '../redux/types/movies.types';
+import {MovieDetailInterface} from '../redux/types/movies/movies.types';
 import {Text} from 'react-native';
 import {posterSizes} from '../common/image/size';
 import {Image} from 'react-native-elements';
@@ -73,7 +73,7 @@ export const DetailMovie = ({route, navigation}: any) => {
   useEffect(() => {
     console.log('Screen Detail Movie');
     dispatch(clickMovies(id));
-    console.log(detail);
+    //console.log(detail);
   }, []);
 
   return (

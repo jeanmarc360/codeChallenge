@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Image} from 'react-native';
 import {TextInput} from 'react-native';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
-import {images} from '../common/image/images';
+import {images} from '../../common/image/images';
 interface searchProps {
   onChangeText: (text: String) => String;
   onKeyPressSearch: () => void;

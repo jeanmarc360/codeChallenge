@@ -6,16 +6,16 @@ import {
   FETCH_MOVIES_INITIATED,
   FETCH_MOVIES_FAILED,
   FETCH_MOVIES_SUCCEEDED,
-} from '../types';
+} from '../../types';
 //import { storiesService } from '../../services';
 import {
   MovieInterface,
   MovieDetailInterface,
   MoviesActionTypes,
-} from '../types';
+} from '../../types';
 import {ActionCreator} from 'redux';
-import {get} from '../../services/index';
-import {URLS} from '../../services/url';
+import {get} from '../../../services/index';
+import {URLS} from '../../../services/url';
 
 const fetchMovieSuccess: ActionCreator<MoviesActionTypes> = (
   movies: MovieInterface,
